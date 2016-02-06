@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="800"
+   height="600"
+   id="svg3898"
+   version="1.1"
+   inkscape:version="0.48.4 r"
+   sodipodi:docname="Background.svg"
+   inkscape:export-filename="D:\Development\Games\Coco projects\Cocos-2d JS\HelloBird\Resources\Background.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs3900" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.79250448"
+     inkscape:cx="536.28543"
+     inkscape:cy="224.59206"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     showguides="true"
+     inkscape:guide-bbox="true">
+    <sodipodi:guide
+       orientation="0,1"
+       position="-66.918245,207.00044"
+       id="guide4481" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="0,383.6646"
+       id="guide4485" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="800.34221,244.47465"
+       id="guide4487" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="145.43565,0"
+       id="guide4499" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata3903">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-452.3622)">
+    <rect
+       style="fill:#00c8ff;fill-opacity:1;stroke:#00c8ff;stroke-width:6.04620886;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect3971"
+       width="793.9538"
+       height="593.9538"
+       x="3.0231044"
+       y="455.38528" />
+    <path
+       style="fill:#00ff00;stroke:#008000;stroke-width:7;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 196.19483,1042.9325 c 0,0 103.12272,-389.90318 206.93889,5.0473"
+       id="path4505"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#00ff00;stroke:#008000;stroke-width:7;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 448.34284,1048.6818 c 0,0 104.73127,-485.80168 267.50637,5.0473"
+       id="path4503"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#00ff00;stroke:#008000;stroke-width:7;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m -0.91508704,1053.2773 c 0,0 112.67972704,-329.21284 305.84499704,0 0,0 105.52545,-409.81656 277.22791,0 2.68285,0 107.31403,-194.22587 219.09948,0"
+       id="path4501"
+       inkscape:connector-curvature="0" />
+  </g>
+</svg>
