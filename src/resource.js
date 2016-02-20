@@ -5,7 +5,9 @@ var res = {
 	pipe_bot_png : "res/pipe-bot.png"
 };
 
-var g_resources = [];
-for (var i in res) {
-    g_resources.push(res[i]);
-}
+var g_resources = [
+    {type:"image", src:res.background_png},
+    {type:"image", src:res.sprite_png},
+    {type:"image", src:res.pipe_top_png},
+    {type:"image", src:res.pipe_bot_png},
+];
