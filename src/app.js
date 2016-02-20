@@ -4,12 +4,17 @@ var ParallaxLayer = cc.Layer.extend({
     next_hidden_pipe_index:0,
     flip: true,
     background_layer: null,
+    bird_layer: null,
     pipe_layer: null,
-    ctor:function (background_layer, pipe_layer) {
+    label: null,
+    ctor:function (background_layer, pipe_layer, bird_layer, label) {
         this._super();
 
         this.background_layer = background_layer;
         this.pipe_layer = pipe_layer;
+        this.bird_layer = bird_layer;
+        this.label = label;
+        this.label.setString(0);
         var background_sprites = background_layer.sprites;
         var pipe_lines = pipe_layer.pipe_lines;
 
@@ -32,11 +37,12 @@ var ParallaxLayer = cc.Layer.extend({
     },
 
     update:function(dt){
-        var position = -1000;
+        var position = -1500;
         this.parallaxNode.x = this.parallaxNode.x + position * dt;
 
         this.update_background();
         this.update_pipes();
+        this.check_for_collision();
     },
 
     update_background: function() {
@@ -75,20 +81,47 @@ var ParallaxLayer = cc.Layer.extend({
 
             var x = possible_hidden_bot_pipe_parallax.getOffset().x + (size.width + (size.width/3));
             var y = possible_hidden_bot_pipe_parallax.getOffset().y;
-            possible_hidden_bot_pipe_parallax.setOffset({x, y});
+            var defaultY = (possible_hidden_bot_pipe_sprite.height)/2;
+            var min = -defaultY + 60;
+            var max = defaultY;
+            var bot_pipe_position = Math.floor(Math.random() * (max - min)) + min;
+            var top_pipe_position = bot_pipe_position + 300 + defaultY*2;
+            var y = 13.5;
+            possible_hidden_bot_pipe_parallax.setOffset({x, y:bot_pipe_position});
 
             var x = possible_hidden_top_pipe_parallax.getOffset().x + (size.width + (size.width/3));
-            var y = possible_hidden_top_pipe_parallax.getOffset().y;
-            possible_hidden_top_pipe_parallax.setOffset({x, y});
+            var y = 682.5;
+            possible_hidden_top_pipe_parallax.setOffset({x, y:top_pipe_position});
 
             this.next_hidden_pipe_index++;
             this.next_hidden_pipe_index = this.next_hidden_pipe_index % 4;
+
+            this.label.setString(parseInt(this.label.getString())+1);
         }
     },
+
+    check_for_collision: function() {
+        var closest_bot_pipe_sprite = this.pipe_layer.pipe_lines[this.next_hidden_pipe_index].bot_pipe;
+        var closest_top_pipe_sprite = this.pipe_layer.pipe_lines[this.next_hidden_pipe_index].top_pipe;
+        var bird_sprite = this.bird_layer.bird;
+        var top_pipe_coords_in_world_space = this.parallaxNode.convertToWorldSpace(closest_top_pipe_sprite.getPosition());
+        var bot_pipe_coords_in_world_space = this.parallaxNode.convertToWorldSpace(closest_bot_pipe_sprite.getPosition());
+        if((bird_sprite.y > (top_pipe_coords_in_world_space.y - (closest_top_pipe_sprite.height/2)) || bird_sprite.y < (bot_pipe_coords_in_world_space.y + (closest_top_pipe_sprite.height/2)))
+         && top_pipe_coords_in_world_space.x < bird_sprite.width)  {
+                this.runAction(cc.Sequence.create(
+                    cc.CallFunc.create(function(node) {
+                        var scene = new HelloWorldScene();
+                        cc.Director.sharedDirector.runScene(scene);
+                    }, this)
+                ));
+         }
+    }
 });
 
 var BirdLayer = cc.Layer.extend({
     bird: null,
+    velocity: 0,
+    acceleration: -1500,
     ctor:function() {
 
         this._super();
@@ -104,7 +137,27 @@ var BirdLayer = cc.Layer.extend({
 
         this.addChild(this.bird);
 
+        var self = this;
+
+        if(cc.sys.capabilities.hasOwnProperty('keyboard')){
+            cc.eventManager.addListener({
+                event: cc.EventListener.KEYBOARD,
+                onKeyPressed : function(key) {
+                    self.velocity = 700;
+                }
+            }, this);
+        }
+
+        this.scheduleUpdate();
+
         return true;
+    },
+
+    update:function(dt){
+        var v = this.velocity + this.acceleration*dt;
+        var ds = v*dt + (0.5)*this.acceleration*Math.pow(dt, 2);
+        this.bird.y = this.bird.y + ds;
+        this.velocity = v;
     }
 
 });
@@ -115,12 +168,12 @@ var PipeLine = function(offset, size) {
 
     this.bot_pipe.attr({
         x: offset,
-        y: this.bot_pipe.height/2
+        y: 0
     });
 
     this.top_pipe.attr({
         x: offset,
-        y: size.height - this.top_pipe.height/2
+        y: size.height
     });
 }
 
@@ -153,13 +206,16 @@ var HelloWorldScene = cc.Scene.extend({
             }
         }
 
+        var label = cc.LabelTTF.create(0, "Arial", 32);
+        label.setPosition(30, 16);
+
         backgroundLayer.init(size);
         pipeLayer.init(size);
-
-        var parallaxLayer = new ParallaxLayer(backgroundLayer, pipeLayer);
         var birdLayer = new BirdLayer();
+        var parallaxLayer = new ParallaxLayer(backgroundLayer, pipeLayer, birdLayer, label);
         this.addChild(parallaxLayer);
         this.addChild(birdLayer);
+        this.addChild(label);
     }
 });
 
